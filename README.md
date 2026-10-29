@@ -5,6 +5,7 @@ Web fresca para academias, autoescuelas y centros de formación, con cursos, mé
 - Sectores: academia, formacion, autoescuela, idiomas, oposiciones. Estilo: fresco. Plan mínimo: presencia.
 - Secciones: hero, cursos, metodo, profesores, resultados, preguntas, inscripcion, contacto (más el diseño `texto` para apartados nuevos).
 - Campos propios: `cursos[]` (con insignias y `destacado`), `hero.destacado` (pegatina), `resultados.items` (cifras; sin cifras no se pinta), formulario de inscripción con desplegable de cursos.
+- SEO de base incluido (`src/lib/seo.ts`): canónica, og:image, JSON-LD del negocio y de las preguntas frecuentes, `robots.txt`, `sitemap.xml` y `llms.txt`; `noindex` si `seo.indexable: false`.
 - Contenido editable en `site.yaml`; metadatos en `template.yaml`; reglas para el agente en `CLAUDE.md`; fotos de la demo en `fotos.json`.
 
 ```

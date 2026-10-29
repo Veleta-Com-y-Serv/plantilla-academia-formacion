@@ -20,7 +20,7 @@ const fondos = ['bg-acento', 'bg-primario', 'bg-[var(--lima-suave)]', 'bg-[var(-
           <li>
             <div class="relative mr-3 mt-3">
               <span class:list={['absolute -right-3 -top-3 h-full w-full esquina', fondos[i % fondos.length]]} aria-hidden="true" />
-              <Imagen src={p.foto || '/placeholders/persona.svg'} alt={`Foto de ${p.nombre}`} ancho={600} alto={720} class="esquina relative aspect-[5/6] w-full object-cover" />
+              <Imagen src={p.foto || '/placeholders/persona.svg'} alt={p.nombre} ancho={600} alto={720} class="esquina relative aspect-[5/6] w-full object-cover" />
             </div>
             <p class="mt-6 text-xl font-extrabold tracking-tight text-primario">{p.nombre}</p>
             {p.cargo && <p class="mt-1 text-sm font-bold uppercase tracking-[.06em] opacity-70">{p.cargo}</p>}

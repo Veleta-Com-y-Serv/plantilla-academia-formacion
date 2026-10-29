@@ -15,6 +15,7 @@ function resolver(ruta?: string) {
   return existsSync(join(publico, respaldo)) ? respaldo : ruta;
 }
 const ruta = resolver(src);
+// `alt` vacío = foto decorativa (también aria-hidden). Las de contenido llevan su alt (src/lib/seo.ts: altHero, altFicha…).
 ---
 
 {
@@ -22,6 +23,7 @@ const ruta = resolver(src);
     <img
       src={ruta}
       alt={alt}
+      aria-hidden={alt === '' ? 'true' : undefined}
       width={ancho}
       height={alto}
       class={clase}

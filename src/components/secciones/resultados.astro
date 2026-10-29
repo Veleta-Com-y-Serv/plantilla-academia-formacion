@@ -2,6 +2,7 @@
 // Resultados: cifras grandes con subrayado lima + texto e imagen opcional. Campos: `items[]` (titulo = la cifra,
 // p. ej. "92 %"; texto = qué mide), `texto`, `imagen`. Sin ninguna cifra, la sección no se pinta.
 import { seccion, valor } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
@@ -31,7 +32,7 @@ const cifras = s ? s.items.filter((it) => valor(it.titulo)) : [];
         {s.imagen && (
           <div class="relative">
             <span class="absolute -left-4 -top-4 h-2/3 w-2/3 rounded-full bg-acento/60" aria-hidden="true" />
-            <Imagen src={s.imagen} alt="" ancho={1200} alto={900} class="esquina relative aspect-[4/3] w-full object-cover" />
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={900} class="esquina relative aspect-[4/3] w-full object-cover" />
           </div>
         )}
       </div>

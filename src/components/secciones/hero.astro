@@ -2,6 +2,7 @@
 // Hero fresco a dos columnas: texto con botones y etiquetas con icono (`items`) a la izquierda; a la derecha la foto
 // sobre formas geométricas (círculo lima, bloque índigo, trama de puntos) y la pegatina `destacado` {titulo, texto}.
 import { seccion } from '../../data/site';
+import { altHero } from '../../lib/seo';
 import Imagen from '../ui/Imagen.astro';
 import Icono from '../ui/Icono.astro';
 interface Props { id: string; primera?: boolean }
@@ -42,7 +43,7 @@ const destacado = (s?.destacado ?? {}) as { titulo?: string; texto?: string };
           <span class="absolute -bottom-6 -left-3 h-[45%] w-[45%] rotate-[-8deg] esquina bg-primario md:-left-8" aria-hidden="true" />
           <span class="puntos absolute -bottom-8 right-6 h-24 w-40" aria-hidden="true" />
           {s.imagen ? (
-            <Imagen src={s.imagen} alt="" ancho={1200} alto={900} prioridad={primera} class="esquina relative aspect-[4/3] w-full object-cover shadow-[0_30px_60px_-30px_rgb(0_0_0/.45)]" />
+            <Imagen src={s.imagen} alt={altHero()} ancho={1200} alto={900} prioridad={primera} class="esquina relative aspect-[4/3] w-full object-cover shadow-[0_30px_60px_-30px_rgb(0_0_0/.45)]" />
           ) : (
             <div class="esquina relative aspect-[4/3] w-full bg-[var(--indigo-suave)]" />
           )}
