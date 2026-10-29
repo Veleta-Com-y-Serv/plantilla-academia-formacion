@@ -1,0 +1,52 @@
+---
+// Contacto: fichas de datos con icono en cuadro lima y, debajo, plano (enlaza a mapas) + formulario.
+// Campos: `antetitulo`, `titulo`, `texto`, `imagen` (plano opcional), `boton` (texto del botón, opcional).
+import { seccion, site, tel, mapa, whatsapp, valor } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const datos = [
+  c.direccion && { icono: 'mapa', valor: c.direccion, url: mapa(c.direccion), externo: true },
+  c.telefono && { icono: 'telefono', valor: c.telefono, url: tel(c.telefono), externo: false },
+  c.whatsapp && { icono: 'whatsapp', valor: c.whatsapp, url: whatsapp(c.whatsapp), externo: true },
+  c.email && { icono: 'correo', valor: c.email, url: `mailto:${c.email}`, externo: false },
+  c.horario && { icono: 'reloj', valor: c.horario, url: '', externo: false },
+].filter(Boolean) as { icono: string; valor: string; url: string; externo: boolean }[];
+const boton = valor(s?.boton) || undefined;
+---
+
+{
+  s && (
+    <Seccion id={id} class="banda-gris">
+      <Titular alinear="centro" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {datos.length > 0 && (
+        <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(13rem,1fr))]">
+          {datos.map((d) => (
+            <li class="tarjeta flex items-start gap-4 p-5">
+              <span class="icono-cuadro h-11 w-11"><Icono nombre={d.icono} tam={20} /></span>
+              <span class="min-w-0 self-center break-words font-semibold">
+                {d.url ? <a href={d.url} rel={d.externo ? 'noopener' : undefined} target={d.externo ? '_blank' : undefined} class="hover:text-primario">{d.valor}</a> : d.valor}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div class:list={['mt-8 grid gap-6', s.imagen && 'md:grid-cols-2']}>
+        {s.imagen && (
+          <a href={mapa(c.direccion) || undefined} rel="noopener" target="_blank" class="esquina block overflow-hidden border border-texto/10" aria-label={c.direccion || site.nombre}>
+            <Imagen src={s.imagen} alt="" ancho={1000} alto={700} class="h-full min-h-[16rem] w-full object-cover" />
+          </a>
+        )}
+        <div class="tarjeta p-6 md:p-9">
+          <FormularioContacto boton={boton} prefijo={`${id}-f`} />
+        </div>
+      </div>
+    </Seccion>
+  )
+}

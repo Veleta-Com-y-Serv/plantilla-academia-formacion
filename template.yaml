@@ -1,0 +1,21 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: academia-formacion
+nombre: Academia y formación
+descripcion: Web fresca para academias, autoescuelas y centros de formación, con cursos, método e inscripción.
+sectores: [academia, formacion, autoescuela, idiomas, oposiciones]
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: cursos, nombre: Cursos }
+  - { id: metodo, nombre: Método }
+  - { id: profesores, nombre: Profesores }
+  - { id: resultados, nombre: Resultados }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: inscripcion, nombre: Inscripción }
+  - { id: contacto, nombre: Contacto }
+estilo: fresco
+plan_minimo: presencia
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-academia-formacion.noexpertise.com
+activa: true
+orden: 120

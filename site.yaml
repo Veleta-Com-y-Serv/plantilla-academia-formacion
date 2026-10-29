@@ -1,0 +1,133 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas siempre planas: nunca una lista dentro de un elemento de lista. Precios siempre entre comillas.
+nombre: Academia Mirlo
+eslogan: Idiomas, refuerzo escolar y oposiciones en Tudela.
+sector: academia
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = nombre con sello geométrico.
+colores:
+  primario: "#3730a3"   # índigo (títulos, bandas, pie)
+  acento: "#a3e635"     # lima (botones, formas, detalles)
+  fondo: "#ffffff"
+  texto: "#1e1b4b"
+contacto:
+  telefono: "948 82 64 15"
+  email: info@academiamirlo.es
+  direccion: Calle Gaztambide 14, 31500 Tudela (Navarra)
+  horario: "Lunes a viernes, de 10:00 a 13:00 y de 16:00 a 21:00."
+  whatsapp: "+34 633 82 64 15"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: Cursos, url: "/#cursos" }
+  - { texto: Método, url: "/#metodo" }
+  - { texto: Profesores, url: "/#profesores" }
+  - { texto: Preguntas, url: "/#preguntas" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Inscríbete, url: "/#inscripcion" }
+seo:
+  titulo: Academia Mirlo · Idiomas, refuerzo y oposiciones en Tudela
+  descripcion: "Inglés, francés y alemán para todas las edades, refuerzo de ESO y Bachillerato y preparación de oposiciones en Tudela. Grupos reducidos y clase de prueba."
+  tipo: EducationalOrganization   # tipo de schema.org (EducationalOrganization, School, DrivingSchool…)
+marca_pie: true   # «Web creada con NoExpertise» en el pie
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Academia en el centro de Tudela
+    titulo: Aprende con método. Aprueba con confianza.
+    texto: "Idiomas, refuerzo escolar y oposiciones en grupos de máximo 8 alumnos. Te ayudamos a elegir el curso que encaja contigo."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Ver cursos, url: "/#cursos" }
+    cta_secundario: { texto: Pedir información, url: "/#contacto" }
+    destacado: { titulo: "Próximo inicio: octubre", texto: "Quedan plazas en todos los niveles" }   # pegatina sobre la foto
+    items:   # 3 etiquetas con icono
+      - { titulo: Grupos reducidos, icono: usuarios }
+      - { titulo: Presencial y online, icono: portatil }
+      - { titulo: Clase de prueba, icono: check }
+
+  cursos:
+    activa: true
+    antetitulo: Cursos
+    titulo: Elige tu curso
+    texto: "Todos los cursos empiezan con una prueba de nivel sin coste."
+    destacado_texto: Más pedido   # etiqueta de los cursos con destacado: true (opcional)
+    cta: { texto: Inscribirme, url: "/#inscripcion" }   # botón de cada tarjeta
+    cursos:
+      - { titulo: Inglés B1 y B2, texto: "Preparación de los exámenes oficiales con simulacros cada mes.", nivel: "B1 · B2", modalidad: Presencial, duracion: "4 h por semana", inicio: "6 de octubre", precio: "75 €/mes", imagen: /fotos/curso-1.jpg, destacado: true }
+      - { titulo: Inglés para niños, texto: "Aprender jugando, con canciones, cuentos y mucha conversación.", nivel: "6 a 12 años", modalidad: Presencial, duracion: "2 h por semana", inicio: "29 de septiembre", precio: "55 €/mes", imagen: /fotos/curso-2.jpg, destacado: false }
+      - { titulo: Francés y alemán, texto: "Desde cero o para retomar. Grupos de iniciación e intermedio.", nivel: "A1 · A2", modalidad: Presencial u online, duracion: "3 h por semana", inicio: "13 de octubre", precio: "65 €/mes", imagen: /fotos/curso-3.jpg, destacado: false }
+      - { titulo: Auxiliar Administrativo, texto: "Temario actualizado, test semanales y tutorías para las convocatorias de Navarra y del Estado.", nivel: Oposiciones, modalidad: Online con tutorías, duracion: "9 meses", inicio: "20 de octubre", precio: "120 €/mes", imagen: /fotos/curso-4.jpg, destacado: true }
+      - { titulo: Refuerzo ESO y Bachillerato, texto: "Matemáticas, física, química e inglés. Técnicas de estudio incluidas.", nivel: "ESO · Bachillerato", modalidad: Grupos de 6, duracion: "Todo el curso", inicio: Abierto todo el año, precio: "90 €/mes", imagen: /fotos/curso-5.jpg, destacado: false }
+      - { titulo: Preparación de la PAU, texto: "Repaso intensivo y exámenes de años anteriores corregidos en clase.", nivel: "2.º Bachillerato", modalidad: Intensivo, duracion: "Marzo a junio", inicio: "2 de marzo", precio: "180 €", imagen: /fotos/curso-6.jpg, destacado: false }
+
+  metodo:
+    activa: true
+    antetitulo: Nuestro método
+    titulo: Así aprendes de verdad
+    texto: "Pocas personas por clase, seguimiento semanal y profesores que te conocen por tu nombre."
+    imagen: /fotos/metodo.jpg
+    items:
+      - { titulo: Prueba de nivel, texto: "Empezamos sabiendo dónde estás y adónde quieres llegar.", icono: diana }
+      - { titulo: Grupos de máximo 8, texto: "Hablas, preguntas y practicas en cada clase.", icono: usuarios }
+      - { titulo: Seguimiento semanal, texto: "Ejercicios corregidos y un informe para las familias cada trimestre.", icono: grafico }
+      - { titulo: Simulacros reales, texto: "Exámenes en las mismas condiciones que el día de la prueba.", icono: birrete }
+
+  profesores:
+    activa: true
+    antetitulo: Profesores
+    titulo: Quién te da clase
+    texto: "Profesores titulados, con años de aula y ganas de que aprendas."
+    personas:
+      - { nombre: Elena Arriazu, cargo: Directora · Inglés, foto: /placeholders/persona.svg, texto: "Filóloga inglesa. Examinadora de títulos oficiales." }
+      - { nombre: Javier Sola, cargo: Matemáticas y ciencias, foto: /placeholders/persona.svg, texto: "Ingeniero. Doce años preparando la PAU." }
+      - { nombre: Claire Dubois, cargo: Francés, foto: /placeholders/persona.svg, texto: "Nativa. Clases dinámicas y mucha conversación." }
+      - { nombre: Iñaki Remírez, cargo: Oposiciones, foto: /placeholders/persona.svg, texto: "Funcionario en excedencia. Conoce el examen por dentro." }
+
+  resultados:
+    activa: true
+    antetitulo: Resultados
+    titulo: Nuestro alumnado aprueba
+    texto: "Datos del curso pasado. Sin trucos: grupos pequeños y trabajo constante."
+    imagen: /fotos/aula.jpg
+    items:   # titulo = la cifra; sin cifras la sección no se pinta
+      - { titulo: "92 %", texto: aprueba su examen oficial de inglés }
+      - { titulo: "+350", texto: alumnos cada curso }
+      - { titulo: "8", texto: alumnos como máximo por grupo }
+      - { titulo: "15", texto: años enseñando en Tudela }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Lo que más nos preguntan
+    texto: "¿Tienes otra duda? Escríbenos y te respondemos el mismo día."
+    cta: { texto: Hacer una pregunta, url: "/#contacto" }
+    preguntas:
+      - { pregunta: ¿Puedo probar una clase antes de apuntarme?, respuesta: "Sí. La primera clase es de prueba y no tiene coste ni compromiso." }
+      - { pregunta: ¿Cómo sé qué nivel tengo?, respuesta: "Hacemos una prueba de nivel corta, oral y escrita, antes de empezar." }
+      - { pregunta: ¿Hay matrícula?, respuesta: "No cobramos matrícula. Solo pagas la cuota del mes o del curso." }
+      - { pregunta: ¿Qué pasa si falto a una clase?, respuesta: "Puedes recuperarla en otro grupo de tu nivel esa misma semana." }
+      - { pregunta: ¿Las clases online son en directo?, respuesta: "Sí. Son en directo, con el mismo profesor y el mismo grupo reducido." }
+
+  inscripcion:
+    activa: true
+    antetitulo: Inscripción
+    titulo: Reserva tu plaza
+    texto: "Rellena el formulario y te llamamos para cerrar horario y prueba de nivel."
+    items:
+      - { titulo: Sin matrícula }
+      - { titulo: Primera clase de prueba }
+      - { titulo: Horarios de mañana y de tarde }
+    nota: "Las plazas se asignan por orden de inscripción. Grupos de máximo 8 alumnos."
+    boton: Enviar inscripción
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Ven a conocernos
+    texto: "Estamos junto a la plaza de los Fueros. Pásate o escríbenos."
+    imagen: /placeholders/mapa.svg
+    boton: Enviar consulta

@@ -1,0 +1,46 @@
+---
+// Apartado de texto genérico: antetítulo, título, párrafos, imagen opcional sobre bloque lima, lista con icono y botón.
+// Lo usan los apartados nuevos que pide el cliente (site.yaml: `tipo: texto`).
+import { seccion, parrafos } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id}>
+      <div class:list={['grid items-center gap-14', s.imagen ? 'md:grid-cols-2 md:gap-16' : 'max-w-3xl']}>
+        {s.imagen && (
+          <div class="relative mb-4 mr-4">
+            <span class="absolute -bottom-4 -right-4 h-full w-full esquina bg-acento" aria-hidden="true" />
+            <Imagen src={s.imagen} alt="" ancho={1200} alto={900} class="esquina relative aspect-[4/3] w-full object-cover" />
+          </div>
+        )}
+        <div>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion text-primario">{s.titulo}</h2>}
+          <div class="mt-6 space-y-4 opacity-85">
+            {parrafos(s.texto).map((p) => <p>{p}</p>)}
+          </div>
+          {s.items.length > 0 && (
+            <ul class="mt-8 grid gap-4">
+              {s.items.map((it) => (
+                <li class="flex gap-4">
+                  <span class="icono-cuadro h-10 w-10"><Icono nombre={it.icono} tam={20} /></span>
+                  <div>
+                    <p class="font-bold">{it.titulo}</p>
+                    {it.texto && <p class="text-sm opacity-75">{it.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.cta?.url && <a class="btn mt-8" href={s.cta.url}>{s.cta.texto}</a>}
+        </div>
+      </div>
+    </Seccion>
+  )
+}

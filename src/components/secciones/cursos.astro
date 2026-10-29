@@ -1,0 +1,78 @@
+---
+// Cursos: tarjetas con banda superior de color (lima si `destacado`), foto opcional, insignias (nivel, modalidad),
+// datos (duración, inicio) con icono y precio solo si lo hay. Campos: `cursos[]`
+// { titulo, texto, nivel, duracion, precio, inicio, modalidad, imagen, destacado }, `destacado_texto` (etiqueta de
+// los destacados, opcional) y `cta` (botón de cada tarjeta; al pulsarlo se elige ese curso en el formulario de inscripción).
+import { seccion, valor } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const cursos = s ? s.cursos.filter((c) => valor(c.titulo)) : [];
+const etiqueta = valor(s?.destacado_texto);
+---
+
+{
+  s && (cursos.length > 0 || s.texto) && (
+    <Seccion id={Astro.props.id} class="banda-gris">
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {cursos.map((c) => {
+          const datos = [
+            valor(c.duracion) && { icono: 'reloj', texto: valor(c.duracion) },
+            valor(c.inicio) && { icono: 'calendario', texto: valor(c.inicio) },
+          ].filter(Boolean) as { icono: string; texto: string }[];
+          const precio = valor(c.precio);
+          return (
+            <li class:list={['tarjeta relative flex flex-col overflow-hidden', c.destacado && 'ring-[3px] ring-acento']}>
+              <span class:list={['block h-3', c.destacado ? 'bg-acento' : 'bg-primario']} aria-hidden="true" />
+              {c.destacado && etiqueta && (
+                <span class="insignia absolute right-4 top-5 z-[1] bg-acento text-[var(--c-sobre-acento)] shadow">
+                  <Icono nombre="estrella" tam={14} />
+                  {etiqueta}
+                </span>
+              )}
+              {c.imagen && <Imagen src={c.imagen} alt="" ancho={900} alto={600} class="aspect-[3/2] w-full object-cover" />}
+              <div class="flex flex-1 flex-col p-6">
+                {(valor(c.nivel) || valor(c.modalidad)) && (
+                  <p class="flex flex-wrap gap-2">
+                    {valor(c.nivel) && <span class="insignia insignia--indigo">{c.nivel}</span>}
+                    {valor(c.modalidad) && <span class="insignia insignia--lima">{c.modalidad}</span>}
+                  </p>
+                )}
+                <h3 class="mt-4 text-[1.35rem] text-primario">{c.titulo}</h3>
+                {c.texto && <p class="mt-2 text-[.98rem] opacity-80">{c.texto}</p>}
+                {datos.length > 0 && (
+                  <ul class="mt-5 grid gap-2 border-t border-texto/10 pt-4 text-sm font-semibold">
+                    {datos.map((d) => (
+                      <li class="flex items-center gap-2.5">
+                        <Icono nombre={d.icono} tam={18} class="shrink-0 text-primario" />
+                        {d.texto}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {(precio || s.cta?.url) && (
+                  <div class="mt-auto flex flex-wrap items-center justify-between gap-3 pt-6">
+                    {precio && <p class="text-2xl font-extrabold tracking-tight text-primario">{precio}</p>}
+                    {s.cta?.url && <a class="btn btn-indigo min-h-[2.5rem] px-4 text-sm" href={s.cta.url} data-curso={c.titulo}>{s.cta.texto}</a>}
+                  </div>
+                )}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </Seccion>
+  )
+}
+<script is:inline>
+  // Al pulsar el botón de un curso, lo deja elegido en el desplegable del formulario de inscripción.
+  document.querySelectorAll('[data-curso]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      document.querySelectorAll('select[name="curso"]').forEach(function (s) { s.value = a.getAttribute('data-curso'); });
+    });
+  });
+</script>

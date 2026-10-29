@@ -1,0 +1,33 @@
+---
+// Imagen con carga diferida por defecto. `prioridad` para la del hero (se carga al momento).
+// Si la foto de site.yaml (/fotos/x.jpg) aún no existe en public/, usa su respaldo /placeholders/x.svg (se decide al construir).
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+interface Props { src?: string; alt?: string; ancho?: number; alto?: number; class?: string; prioridad?: boolean }
+const { src, alt = '', ancho = 800, alto = 600, class: clase = '', prioridad = false } = Astro.props;
+
+const publico = join(process.cwd(), 'public');
+function resolver(ruta?: string) {
+  if (!ruta || !ruta.startsWith('/') || ruta.startsWith('//')) return ruta;
+  const limpia = decodeURI(ruta.split(/[?#]/)[0]);
+  if (existsSync(join(publico, limpia))) return ruta;
+  const respaldo = `/placeholders/${limpia.split('/').pop()!.replace(/\.[^.]+$/, '')}.svg`;
+  return existsSync(join(publico, respaldo)) ? respaldo : ruta;
+}
+const ruta = resolver(src);
+---
+
+{
+  ruta && (
+    <img
+      src={ruta}
+      alt={alt}
+      width={ancho}
+      height={alto}
+      class={clase}
+      loading={prioridad ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={prioridad ? 'high' : undefined}
+    />
+  )
+}

@@ -1,0 +1,88 @@
+---
+// Inscripción: banda índigo con titular, `nota` y teléfono/WhatsApp; a la derecha un formulario sin servidor (mailto)
+// con nombre, email, teléfono, curso (desplegable con los títulos de `cursos` de todas las secciones activas) y mensaje.
+// Campos: `texto`, `nota`, `boton` (texto del botón, opcional), `items[]` opcionales (ventajas con check).
+import { seccion, site, tel, whatsapp, valor, todosLosCursos } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const cursos = [...new Set(todosLosCursos().map((x) => valor(x.titulo)).filter(Boolean))];
+const nota = valor(s?.nota);
+const boton = valor(s?.boton) || 'Enviar inscripción';
+const email = c.email;
+const accion = email ? `mailto:${email}?subject=${encodeURIComponent(`Inscripción desde la web de ${site.nombre}`)}` : '';
+const p = `${id}-f`;
+---
+
+{
+  s && (
+    <Seccion id={id} class="banda-indigo relative overflow-hidden">
+      <span class="pointer-events-none absolute -right-24 bottom-[-5rem] h-72 w-72 rounded-full border-[1.5rem] border-acento" aria-hidden="true" />
+      <div class="relative grid gap-10 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-5">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+          {s.items.length > 0 && (
+            <ul class="mt-8 grid gap-3">
+              {s.items.map((it) => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-acento text-[var(--c-sobre-acento)]"><Icono nombre="check" tam={15} /></span>
+                  <span class="font-semibold">{it.titulo}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {nota && <p class="mt-8 esquina border-2 border-dashed border-acento/70 px-5 py-4 text-sm font-semibold">{nota}</p>}
+          {(c.telefono || c.whatsapp) && (
+            <div class="mt-8 flex flex-wrap gap-3">
+              {c.telefono && <a class="btn-sec" href={tel(c.telefono)}><Icono nombre="telefono" tam={18} />{c.telefono}</a>}
+              {c.whatsapp && <a class="btn-sec" href={whatsapp(c.whatsapp)} rel="noopener" target="_blank"><Icono nombre="whatsapp" tam={18} />{c.whatsapp}</a>}
+            </div>
+          )}
+        </div>
+        <div class="lg:col-span-7">
+          <form class="formulario tarjeta p-6 shadow-[10px_10px_0_var(--c-acento)] md:p-9" action={accion || undefined} method="post" enctype="text/plain">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="campo sm:col-span-2">
+                <label for={`${p}-nombre`}>Nombre y apellidos</label>
+                <input id={`${p}-nombre`} name="nombre" type="text" autocomplete="name" required />
+              </div>
+              <div class="campo">
+                <label for={`${p}-email`}>Email</label>
+                <input id={`${p}-email`} name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="campo">
+                <label for={`${p}-telefono`}>Teléfono</label>
+                <input id={`${p}-telefono`} name="telefono" type="tel" autocomplete="tel" />
+              </div>
+              {cursos.length > 0 && (
+                <div class="campo sm:col-span-2">
+                  <label for={`${p}-curso`}>Curso</label>
+                  <select id={`${p}-curso`} name="curso" required>
+                    <option value="">Elige un curso</option>
+                    {cursos.map((t) => <option value={t}>{t}</option>)}
+                  </select>
+                </div>
+              )}
+              <div class="campo sm:col-span-2">
+                <label for={`${p}-mensaje`}>Mensaje</label>
+                <textarea id={`${p}-mensaje`} name="mensaje" rows="3"></textarea>
+              </div>
+            </div>
+            <label class="campo-check">
+              <input type="checkbox" name="privacidad" required />
+              <span>He leído el <a href="/aviso-legal">aviso legal y la política de privacidad</a>.</span>
+            </label>
+            <button type="submit" class="btn">{boton}</button>
+            <p class="formulario-aviso">
+              {email ? 'Al enviar se abre tu programa de correo con la inscripción lista.' : 'Formulario de muestra: todavía no envía mensajes. Usa el teléfono de contacto.'}
+            </p>
+          </form>
+        </div>
+      </div>
+    </Seccion>
+  )
+}

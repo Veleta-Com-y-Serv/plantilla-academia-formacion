@@ -1,0 +1,59 @@
+---
+// Hero fresco a dos columnas: texto con botones y etiquetas con icono (`items`) a la izquierda; a la derecha la foto
+// sobre formas geométricas (círculo lima, bloque índigo, trama de puntos) y la pegatina `destacado` {titulo, texto}.
+import { seccion } from '../../data/site';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+const destacado = (s?.destacado ?? {}) as { titulo?: string; texto?: string };
+---
+
+{
+  s && (
+    <section id={id} class="relative overflow-hidden bg-[var(--c-fondo)]">
+      <div class="contenedor grid items-center gap-14 py-12 md:grid-cols-2 md:gap-12 md:py-20">
+        <div>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          <h1 class="mt-5 text-[clamp(2.5rem,7vw,4.4rem)] text-primario">{s.titulo}</h1>
+          {s.texto && <p class="mt-6 max-w-xl text-lg opacity-80">{s.texto}</p>}
+          {(s.cta?.url || s.cta_secundario?.url) && (
+            <div class="mt-9 flex flex-wrap gap-3">
+              {s.cta?.url && <a class="btn" href={s.cta.url}>{s.cta.texto}</a>}
+              {s.cta_secundario?.url && <a class="btn-sec text-primario" href={s.cta_secundario.url}>{s.cta_secundario.texto}</a>}
+            </div>
+          )}
+          {s.items.length > 0 && (
+            <ul class="mt-9 flex flex-wrap gap-2.5">
+              {s.items.map((it) => (
+                <li class="inline-flex items-center gap-2 rounded-full bg-[var(--gris)] py-1.5 pl-1.5 pr-4 text-sm font-semibold">
+                  <span class="grid h-7 w-7 place-items-center rounded-full bg-primario text-[var(--c-sobre-primario)]">
+                    <Icono nombre={it.icono} tam={15} />
+                  </span>
+                  {it.titulo}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div class="relative mx-auto w-full max-w-xl md:mr-0">
+          <span class="absolute -right-4 -top-8 h-[62%] w-[62%] rounded-full bg-acento md:-right-10 md:-top-10" aria-hidden="true" />
+          <span class="absolute -bottom-6 -left-3 h-[45%] w-[45%] rotate-[-8deg] esquina bg-primario md:-left-8" aria-hidden="true" />
+          <span class="puntos absolute -bottom-8 right-6 h-24 w-40" aria-hidden="true" />
+          {s.imagen ? (
+            <Imagen src={s.imagen} alt="" ancho={1200} alto={900} prioridad={primera} class="esquina relative aspect-[4/3] w-full object-cover shadow-[0_30px_60px_-30px_rgb(0_0_0/.45)]" />
+          ) : (
+            <div class="esquina relative aspect-[4/3] w-full bg-[var(--indigo-suave)]" />
+          )}
+          {destacado.titulo && (
+            <p class="absolute -top-5 left-3 max-w-[13rem] rotate-[-6deg] esquina border-2 border-[var(--c-texto)] bg-[var(--c-fondo)] px-4 py-3 shadow-[5px_5px_0_var(--c-texto)] md:-left-6 md:top-8">
+              <span class="block text-lg font-extrabold leading-tight text-primario">{destacado.titulo}</span>
+              {destacado.texto && <span class="mt-1 block text-sm font-semibold opacity-80">{destacado.texto}</span>}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

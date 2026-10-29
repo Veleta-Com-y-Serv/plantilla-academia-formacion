@@ -1,0 +1,46 @@
+---
+// Método: banda de color primario con texto claro, aros y bloques geométricos; puntos con icono en cuadro lima.
+// Campos: `items[]` (titulo, texto, icono), `imagen` opcional (va a la izquierda, bajo el titular).
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const conImagen = !!s?.imagen;
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="banda-indigo relative overflow-hidden">
+      <span class="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full border-[1.5rem] border-acento" aria-hidden="true" />
+      <span class="pointer-events-none absolute -bottom-10 right-[8%] h-24 w-24 rotate-12 esquina bg-acento" aria-hidden="true" />
+      <div class:list={['relative grid gap-12', conImagen && 'lg:grid-cols-12 lg:gap-16']}>
+        <div class:list={[conImagen && 'lg:col-span-5']}>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+          {conImagen && (
+            <div class="relative mt-10 hidden sm:block">
+              <span class="absolute -bottom-4 -right-4 h-full w-full esquina bg-acento" aria-hidden="true" />
+              <Imagen src={s.imagen} alt="" ancho={1200} alto={900} class="esquina relative aspect-[4/3] w-full object-cover" />
+            </div>
+          )}
+        </div>
+        {s.items.length > 0 && (
+          <ol class:list={['grid gap-5 sm:grid-cols-2', conImagen ? 'lg:col-span-7 content-start' : 'lg:grid-cols-4']}>
+            {s.items.map((it, i) => (
+              <li class="esquina bg-[color-mix(in_srgb,var(--c-sobre-primario)_8%,transparent)] p-6 ring-1 ring-[color-mix(in_srgb,var(--c-sobre-primario)_14%,transparent)]">
+                <div class="flex items-center justify-between">
+                  <span class="icono-cuadro"><Icono nombre={it.icono} /></span>
+                  <span class="text-3xl font-extrabold opacity-30" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <h3 class="mt-5 text-xl">{it.titulo}</h3>
+                {it.texto && <p class="mt-2 opacity-85">{it.texto}</p>}
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+    </Seccion>
+  )
+}

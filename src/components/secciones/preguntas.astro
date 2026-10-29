@@ -1,0 +1,34 @@
+---
+// Preguntas frecuentes: titular a la izquierda (con `cta` opcional) y acordeón nativo <details>/<summary> a la derecha,
+// sin JavaScript. Campos: `preguntas[]` (pregunta, respuesta).
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const preguntas = s ? s.preguntas.filter((p) => p && p.pregunta) : [];
+---
+
+{
+  s && preguntas.length > 0 && (
+    <Seccion id={Astro.props.id}>
+      <div class="grid gap-10 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-4">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+          {s.cta?.url && <a class="btn-sec mt-8 text-primario" href={s.cta.url}>{s.cta.texto}</a>}
+        </div>
+        <div class="grid content-start gap-3 lg:col-span-8">
+          {preguntas.map((p, i) => (
+            <details class="faq esquina bg-[var(--gris)] px-5 md:px-6" open={i === 0}>
+              <summary class="flex items-center justify-between gap-4 py-5 text-[1.05rem] font-bold">
+                {p.pregunta}
+                <span class="faq-signo grid h-8 w-8 shrink-0 place-items-center rounded-full bg-acento text-lg font-extrabold text-[var(--c-sobre-acento)] transition-transform" aria-hidden="true">+</span>
+              </summary>
+              <p class="pb-6 opacity-80">{p.respuesta}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </Seccion>
+  )
+}

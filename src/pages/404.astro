@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="relative overflow-hidden">
+    <span class="absolute -right-16 top-10 h-56 w-56 rounded-full bg-acento" aria-hidden="true"></span>
+    <span class="absolute -left-10 bottom-6 h-40 w-40 rotate-12 esquina bg-primario" aria-hidden="true"></span>
+    <div class="contenedor relative py-24 text-center md:py-32">
+      <p class="text-[clamp(5rem,18vw,9rem)] font-extrabold leading-none tracking-tighter text-primario">404</p>
+      <h1 class="titulo-seccion mt-4">Esta página no existe</h1>
+      <p class="mx-auto mt-4 max-w-md opacity-80">Puede que el enlace esté mal o que la página se haya movido.</p>
+      <p class="mt-9"><a class="btn" href="/">Volver al inicio</a></p>
+    </div>
+  </section>
+</Base>
