@@ -14,11 +14,15 @@ secciones:
   - { id: contacto, nombre: Contacto }
 estilo: fresco
 plan_minimo: presencia
-version: 1.2.0
+version: 1.3.0
 base: astrowind
 demo_url: https://demo-plantilla-academia-formacion.noexpertise.com
 activa: true
 orden: 120
+
+# Páginas propias (docs/plantillas.md § Fichas por elemento y páginas por zona). Espejo en src/data/fichas.ts.
+fichas:
+  - { lista: cursos, campo: cursos, ruta: cursos, nombre: Curso, tipo: Course }
 
 # Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
 # tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.

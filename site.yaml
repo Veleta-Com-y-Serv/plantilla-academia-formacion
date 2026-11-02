@@ -57,11 +57,81 @@ secciones:
     destacado_texto: Más pedido   # etiqueta de los cursos con destacado: true (opcional)
     cta: { texto: Inscribirme, url: "/#inscripcion" }   # botón de cada tarjeta
     cursos:
-      - { titulo: Inglés B1 y B2, texto: "Preparación de los exámenes oficiales con simulacros cada mes.", nivel: "B1 · B2", modalidad: Presencial, duracion: "4 h por semana", inicio: "6 de octubre", precio: "75 €/mes", imagen: /fotos/curso-1.jpg, destacado: true }
-      - { titulo: Inglés para niños, texto: "Aprender jugando, con canciones, cuentos y mucha conversación.", nivel: "6 a 12 años", modalidad: Presencial, duracion: "2 h por semana", inicio: "29 de septiembre", precio: "55 €/mes", imagen: /fotos/curso-2.jpg, destacado: false }
-      - { titulo: Francés y alemán, texto: "Desde cero o para retomar. Grupos de iniciación e intermedio.", nivel: "A1 · A2", modalidad: Presencial u online, duracion: "3 h por semana", inicio: "13 de octubre", precio: "65 €/mes", imagen: /fotos/curso-3.jpg, destacado: false }
-      - { titulo: Auxiliar Administrativo, texto: "Temario actualizado, test semanales y tutorías para las convocatorias de Navarra y del Estado.", nivel: Oposiciones, modalidad: Online con tutorías, duracion: "9 meses", inicio: "20 de octubre", precio: "120 €/mes", imagen: /fotos/curso-4.jpg, destacado: true }
-      - { titulo: Refuerzo ESO y Bachillerato, texto: "Matemáticas, física, química e inglés. Técnicas de estudio incluidas.", nivel: "ESO · Bachillerato", modalidad: Grupos de 6, duracion: "Todo el curso", inicio: Abierto todo el año, precio: "90 €/mes", imagen: /fotos/curso-5.jpg, destacado: false }
+      - titulo: Inglés B1 y B2
+        texto: "Preparación de los exámenes oficiales con simulacros cada mes."
+        nivel: "B1 · B2"
+        modalidad: Presencial
+        duracion: "4 h por semana"
+        inicio: "6 de octubre"
+        precio: "75 €/mes"
+        imagen: /fotos/curso-1.jpg
+        destacado: true
+        detalle: |
+          Este curso está pensado para quien necesita un título oficial de inglés, ya sea para la universidad, para un ascenso o para presentarse a una oposición con mérito de idiomas. Trabajamos las cuatro destrezas de los exámenes de Cambridge y de la Escuela Oficial de Idiomas: comprensión lectora, comprensión oral, expresión escrita y expresión oral.
+
+          Cada semana combinamos gramática en contexto, vocabulario por temas y mucha práctica de conversación en pequeños grupos. Los redactados se corrigen uno a uno y se devuelven con comentarios para que sepas qué error repites y cómo evitarlo.
+
+          Cada mes hacemos un simulacro completo en las mismas condiciones del examen real, con tiempos y hojas de respuestas oficiales. Después lo comentamos en clase y te entregamos un informe con tus puntos fuertes y lo que conviene reforzar. Empiezas con una prueba de nivel sin coste para colocarte en el grupo adecuado y, si dudas entre dos niveles, te acompañamos en la decisión sin compromiso.
+      - titulo: Inglés para niños
+        texto: "Aprender jugando, con canciones, cuentos y mucha conversación."
+        nivel: "6 a 12 años"
+        modalidad: Presencial
+        duracion: "2 h por semana"
+        inicio: "29 de septiembre"
+        precio: "55 €/mes"
+        imagen: /fotos/curso-2.jpg
+        destacado: false
+        detalle: |
+          Un curso de inglés pensado para que los más pequeños pierdan el miedo al idioma y lo usen con naturalidad. Las clases son muy activas: canciones, cuentos ilustrados, juegos de rol y pequeñas manualidades que les obligan a entender y a hablar sin darse cuenta de que están estudiando.
+
+          Los grupos se forman por edad y por nivel, de modo que nadie se queda atrás ni se aburre. La profesora habla en inglés casi todo el tiempo, apoyándose en gestos, tarjetas y objetos, y reserva unos minutos al final de cada sesión para repasar lo aprendido con un juego sencillo.
+
+          Las familias reciben cada trimestre un informe claro sobre cómo avanza su hijo o hija y qué pueden hacer en casa para reforzarlo, sin deberes pesados. Es un buen punto de partida para quien quiere acercarse después a los exámenes oficiales de primaria y secundaria, o simplemente disfrutar de aprender un idioma desde pequeños.
+      - titulo: Francés y alemán
+        texto: "Desde cero o para retomar. Grupos de iniciación e intermedio."
+        nivel: "A1 · A2"
+        modalidad: Presencial u online
+        duracion: "3 h por semana"
+        inicio: "13 de octubre"
+        precio: "65 €/mes"
+        imagen: /fotos/curso-3.jpg
+        destacado: false
+        detalle: |
+          Dos idiomas muy útiles para viajar, estudiar o trabajar en Europa, con un enfoque práctico desde la primera clase. Los grupos de iniciación parten de cero y se centran en lo que realmente se usa: presentarse, pedir en un restaurante, moverse por una ciudad, hablar del trabajo o de la familia. Los de intermedio sirven para retomar el idioma con confianza si lo dejaste hace tiempo.
+
+          La conversación es el eje de la clase y la pronunciación se trabaja desde el principio, con la ayuda de una profesora nativa en el caso del francés. La gramática se explica cuando hace falta y siempre con ejemplos cercanos, sin listas interminables de reglas.
+
+          Puedes asistir a clase en el aula o conectarte desde casa cuando no puedas desplazarte, y el material queda disponible para repasar a tu ritmo. Al terminar cada bloque hacemos una pequeña evaluación para que veas tu progreso y decidas si pasas al siguiente nivel o prefieres consolidar lo aprendido.
+      - titulo: Auxiliar Administrativo
+        texto: "Temario actualizado, test semanales y tutorías para las convocatorias de Navarra y del Estado."
+        nivel: Oposiciones
+        modalidad: Online con tutorías
+        duracion: "9 meses"
+        inicio: "20 de octubre"
+        precio: "120 €/mes"
+        imagen: /fotos/curso-4.jpg
+        destacado: true
+        detalle: |
+          Preparación completa para las convocatorias de auxiliar administrativo de la Comunidad Foral de Navarra y de la Administración del Estado. El temario está actualizado y organizado por bloques, con esquemas y resúmenes que facilitan el estudio constante, incluso si trabajas o tienes cargas familiares.
+
+          Cada semana realizas un test cronometrado que se corrige automáticamente y, además, resolvemos en tutoría las dudas que hayan surgido. Un preparador te ayuda a organizar el calendario de estudio según tu disponibilidad, a repartir los temas y a ajustar el ritmo cuando se acerca la fecha del examen.
+
+          Las clases en línea quedan grabadas, de manera que puedes verlas cuando mejor te venga. Antes de cada convocatoria hacemos simulacros con el formato real de las pruebas, incluida la parte práctica de ofimática, y repasamos juntos los criterios de valoración. Nuestro objetivo es que llegues al examen con método, sabiendo dónde puntúas más y sin sorpresas el día de la prueba.
+      - titulo: Refuerzo ESO y Bachillerato
+        texto: "Matemáticas, física, química e inglés. Técnicas de estudio incluidas."
+        nivel: "ESO · Bachillerato"
+        modalidad: Grupos de 6
+        duracion: "Todo el curso"
+        inicio: Abierto todo el año
+        precio: "90 €/mes"
+        imagen: /fotos/curso-5.jpg
+        destacado: false
+        detalle: |
+          Un apoyo constante durante todo el curso para el alumnado que quiere mejorar sus notas o no perder el hilo en las materias que más se atragantan: matemáticas, física, química e inglés. Los grupos son reducidos, de manera que cada estudiante puede preguntar y recibe atención individual dentro de la clase.
+
+          Partimos de lo que se está dando en el instituto y resolvemos dudas de los ejercicios y de los exámenes próximos. También dedicamos tiempo a lo que suele faltar: técnicas de estudio, organización de la semana, cómo preparar un examen y cómo repasar sin agobiarse en la víspera.
+
+          Los profesores se coordinan con las familias, que reciben un seguimiento periódico con los avances y las áreas pendientes. La matrícula está abierta todo el año, así que puedes incorporarte cuando surja la necesidad, sin esperar al inicio del trimestre. Es una buena opción tanto para quien necesita recuperar una asignatura como para quien quiere afianzar una base sólida antes de dar el salto de curso.
       - { titulo: Preparación de la PAU, texto: "Repaso intensivo y exámenes de años anteriores corregidos en clase.", nivel: "2.º Bachillerato", modalidad: Intensivo, duracion: "Marzo a junio", inicio: "2 de marzo", precio: "180 €", imagen: /fotos/curso-6.jpg, destacado: false }
 
   metodo:

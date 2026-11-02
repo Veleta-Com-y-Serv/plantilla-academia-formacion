@@ -1,10 +1,12 @@
 ---
 // Cursos: tarjetas con banda superior de color (lima si `destacado`), foto opcional, insignias (nivel, modalidad),
 // datos (duración, inicio) con icono y precio solo si lo hay. Campos: `cursos[]`
+// Los cursos con `detalle` tienen página propia en /cursos/<slug>/ (tarjeta entera clicable vía enlaceDe).
 // { titulo, texto, nivel, duracion, precio, inicio, modalidad, imagen, destacado }, `destacado_texto` (etiqueta de
 // los destacados, opcional) y `cta` (botón de cada tarjeta; al pulsarlo se elige ese curso en el formulario de inscripción).
 import { seccion, valor } from '../../data/site';
 import { altFicha } from '../../lib/seo';
+import { enlaceDe } from '../../lib/paginas';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
@@ -43,8 +45,11 @@ const etiqueta = valor(s?.destacado_texto);
                     {valor(c.modalidad) && <span class="insignia insignia--lima">{c.modalidad}</span>}
                   </p>
                 )}
-                <h3 class="mt-4 text-[1.35rem] text-primario">{c.titulo}</h3>
+                <h3 class="mt-4 text-[1.35rem] text-primario">
+                  {enlaceDe(c) ? <a href={enlaceDe(c)} class="after:absolute after:inset-0 after:content-[''] after:rounded-[var(--esquina)] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-[3px] focus-visible:after:outline-offset-2 focus-visible:after:outline-primario" style="text-decoration:none;color:inherit">{c.titulo}</a> : c.titulo}
+                </h3>
                 {c.texto && <p class="mt-2 text-[.98rem] opacity-80">{c.texto}</p>}
+                {enlaceDe(c) && <span class="mt-3 inline-flex items-center gap-1 text-sm font-extrabold text-primario" aria-hidden="true">Ver más <Icono nombre="flecha" tam={16} /></span>}
                 {datos.length > 0 && (
                   <ul class="mt-5 grid gap-2 border-t border-texto/10 pt-4 text-sm font-semibold">
                     {datos.map((d) => (
@@ -58,7 +63,7 @@ const etiqueta = valor(s?.destacado_texto);
                 {(precio || s.cta?.url) && (
                   <div class="mt-auto flex flex-wrap items-center justify-between gap-3 pt-6">
                     {precio && <p class="text-2xl font-extrabold tracking-tight text-primario">{precio}</p>}
-                    {s.cta?.url && <a class="btn btn-indigo min-h-[2.5rem] px-4 text-sm" href={s.cta.url} data-curso={c.titulo}>{s.cta.texto}</a>}
+                    {s.cta?.url && <a class="btn btn-indigo relative z-[2] min-h-[2.5rem] px-4 text-sm" href={s.cta.url} data-curso={c.titulo}>{s.cta.texto}</a>}
                   </div>
                 )}
               </div>
