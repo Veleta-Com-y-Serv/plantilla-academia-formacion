@@ -11,6 +11,7 @@ import { seccion, site, tel, whatsapp } from '../../data/site';
 import { fichas, relacionadas, resumen } from '../../lib/paginas';
 import type { Ficha } from '../../lib/paginas';
 import { altGaleria, jsonLdFicha, jsonLdMigas, urlBase } from '../../lib/seo';
+import { enlace, rutaDeSeccion } from '../../lib/multipagina';
 
 export function getStaticPaths() {
   return fichas().map((f) => ({ params: { coleccion: f.def.ruta, slug: f.slug }, props: { f } }));
@@ -22,11 +23,11 @@ const base = urlBase(Astro.site);
 const nombreSeccion = String(f.seccion.antetitulo || f.seccion.titulo || f.def.nombre).trim();
 const migas = [
   { nombre: 'Inicio', ruta: '/' },
-  { nombre: nombreSeccion, ruta: `/#${f.idSeccion}` },
+  { nombre: nombreSeccion, ruta: rutaDeSeccion(f.idSeccion) },
   { nombre: f.titulo, ruta: f.url },
 ];
 const c = site.contacto;
-const cita = seccion('inscripcion') ? '/#inscripcion' : site.boton_cabecera?.url || '/#contacto';
+const cita = seccion('inscripcion') ? enlace('/#inscripcion') : site.boton_cabecera?.url || enlace('/#contacto');
 const textoCita = (seccion(f.idSeccion) as any)?.cta?.texto || site.boton_cabecera?.texto || 'Inscribirme';
 const wa = whatsapp(c.whatsapp, `Hola, quiero información sobre ${f.titulo}`);
 const nivel = f.datos.find((d) => d.clave === 'nivel')?.valor ?? '';
@@ -139,7 +140,7 @@ const descripcion = resumen(f.texto || f.detalle[0] || '');
             </li>
           ))}
         </ul>
-        <p class="mt-10"><a class="btn btn-indigo" href={`/#${f.idSeccion}`}>Ver todos los cursos</a></p>
+        <p class="mt-10"><a class="btn btn-indigo" href={rutaDeSeccion(f.idSeccion)}>Ver todos los cursos</a></p>
       </div>
     </section>
   )}
